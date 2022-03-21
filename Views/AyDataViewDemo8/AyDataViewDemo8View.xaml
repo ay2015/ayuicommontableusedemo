@@ -1,0 +1,122 @@
+﻿<AyPage x:Class="AyTableViewDemo.Views.AyDataViewDemo8.AyDataViewDemo8View"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:md="clr-namespace:AyTableViewDemo.Models"
+      xmlns:control="http://www.ayjs.net/controls"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:controller="clr-namespace:AyTableViewDemo.Controllers"
+          
+      xmlns:local="clr-namespace:AyTableViewDemo.Views.AyDataViewDemo8"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      Title="">
+    <AyPage.DataContext>
+        <controller:AyDataViewDemo8Controller />
+    </AyPage.DataContext>
+    <Grid Margin="10,10,10,10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Height="38"  x:Name="forms" BorderBrush="#E1E6EB" BorderThickness="1,1,1,0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{Binding ElementName=tableView,Path=HeadBrush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0" Height="28" VerticalAlignment="Center" >
+                <TextBlock Text="姓名:"    VerticalAlignment="Center"></TextBlock>
+                <control:AyFormInput Width="120" VerticalAlignment="Stretch" Text="{Binding SearchModel.SearchName,Mode=TwoWay}"></control:AyFormInput>
+                <TextBlock VerticalAlignment="Center"
+                       Text="性别:"
+                       Margin="1,0,0,0"></TextBlock>
+                <control:AyComboBox Width="100" VerticalAlignment="Stretch"   ItemsSource="{Binding SexCbo}" 
+                                    DisplayMemberPath="ItemText" SelectedValuePath="ItemValue" SelectedValue="{Binding SearchModel.CboSexSelect}"
+                                    SearchBoxMask="性别" SelectedIndex="0">
+                </control:AyComboBox>
+
+                <control:AyIconAllButton Width="auto" Mvc.Action="{Binding Search}" Mvc.Event="Click" Mvc.Parameter="1"
+                                         Padding="10,0"  Margin="5,0,0,0"    VerticalAlignment="Stretch"   Content="搜索"  BorderCornerRadius="0"  Icon="fa_search"   Style="{StaticResource Button.Primary}" >
+                    
+                </control:AyIconAllButton>
+            </StackPanel>
+        </Border>
+
+        <control:AyTableView x:Name="tableView" Grid.Row="1" BorderBrush="#E1E6EB" BorderThickness="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  CellNavigation="false" OrderBySupport="true" HeaderResizeBorderBrush="#EBEBEB"   FixedColumnCount="2"
+                  ShowHorizontalGridLines="True"    HasIndexColumn="true" HasCheckBoxColumn="True"    OrderCondition="{Binding SearchModel.OrderCondition,Mode=TwoWay}"
+                  ShowVerticalGridLines="True"  SelectionMode="Multiple" IndexColumnWidth="28" AlterLineBrushSupport="False"
+                  GridLinesBrush="#EBEBEB" HeadFontWeight="Bold" HasRectangleSelection="false" MinRowHeight="28" MaxRowHeight="56" RowHeight="NaN"
+                  ItemsSource="{Binding ItemsSource, ElementName=dataPager,Mode=TwoWay}"
+                 ItemsCount="{Binding Result.Total}" HeadRowCount="2" HeaderHeight="28"
+                >
+            <MvcRouteCollection.Routes>
+                <RouteSetter  Action="{Binding Search}" Parameter="2" Event="SortingChanged" />
+            </MvcRouteCollection.Routes>
+            
+            <control:AyTableView.Resources>
+                <IfElseResourceConverter x:Key="sexFormatter" Formatter='0:男,1:女'></IfElseResourceConverter>
+            </control:AyTableView.Resources>
+            <control:AyTableView.EmptyDataResultTemplate>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <control:AyIconAll Icon="path_aytablenodata" Stroke="#009900"  Foreground="#009900" Width="18" Height="18" VerticalAlignment="Center"></control:AyIconAll>
+                    <TextBlock Foreground="#818181"  Margin="10,0,0,0"  FontSize="14" VerticalAlignment="Center" Text="没有查询到符合条件的记录"
+                               ></TextBlock>
+                </StackPanel>
+            </control:AyTableView.EmptyDataResultTemplate>
+            <control:AyTableViewColumn Title="姓名" Field="Name" SortDirection="No"   RowSpan="2" HorizontalContentAlignment="Center" Width="100"    VerticalContentAlignment="Center"></control:AyTableViewColumn>
+            <control:AyTableViewColumn  GroupName="基本信息1" >
+                <control:AyTableViewColumn.Columns>
+                    <control:AyTableViewColumn Title="性别" Width="90" 
+                                    HorizontalContentAlignment="Center"   SortDirection="No"
+                                    Field="Sex"  Formatter="{StaticResource sexFormatter}"
+                                    VerticalContentAlignment="Center"
+                                    >
+                    </control:AyTableViewColumn>
+                    <control:AyTableViewColumn Title="收入" Width="120" 
+                                    HorizontalContentAlignment="Stretch"   
+                                    Field="ShouRu" 
+                                    VerticalContentAlignment="Stretch"
+                                    >
+                        <control:AyTableViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Margin="-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                              Background="{Binding Converter={IfElseColorConverter},ConverterParameter=(2000:FFEE00#00000000}">
+                                    <TextBlock FontSize="12"  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Text="{Binding StringFormat=￥{0:F}}" 
+                                       Foreground="{Binding Converter={IfElseColorConverter},ConverterParameter=(2000:FF0000#000000}">
+                                    </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </control:AyTableViewColumn.CellTemplate>
+                    </control:AyTableViewColumn>
+                    <control:AyTableViewColumn Title="电话"  CellMargin="8,0"  HorizontalAlignment="Center" Width="120"
+                                    HorizontalContentAlignment="Left"     VerticalContentAlignment="Center" 
+                                    Field="Telphone" />
+                </control:AyTableViewColumn.Columns>
+            </control:AyTableViewColumn>
+            <control:AyTableViewColumn Title="地址"  Width="200" CellMargin="8,0"  RowSpan="2"
+                                  HorizontalAlignment="Center"  MaxResizeColumnWidth="400" MinResizeColumnWidth="100"
+                                  HorizontalContentAlignment="Left" CellTextWrapping="Wrap"   CellCharacterEllipsis="CharacterEllipsis"
+                                    Field="Address" />
+
+        </control:AyTableView>
+        <control:AyDataPager Grid.Row="2"
+                             x:Name="dataPager"
+                            Background="{Binding ElementName=tableView,Path=HeadBrush}"
+                             Foreground="#000000"
+                             FontWeight="Normal"
+                             PageSize="{Binding SearchModel.PageSize,Mode=TwoWay}"
+                             PageIndex="{Binding SearchModel.PageIndex,Mode=TwoWay}"
+                             PageSizeList="10,20,30"
+                             Padding="0,5"
+                             ItemsSource="{Binding Result.Data, Mode=TwoWay}"
+                             Total="{Binding Result.Total}"
+                             >
+            <MvcRouteCollection.Routes>
+                <RouteSetter  Action="{Binding Search}"  Event="PageChanged" />
+            </MvcRouteCollection.Routes>
+        </control:AyDataPager>
+    </Grid>
+
+</AyPage>

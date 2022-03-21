@@ -1,0 +1,44 @@
+﻿<AyPage x:Class="AyTableViewDemo.Views.Home.HomeView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:control="http://www.ayjs.net/controls"
+      xmlns:ayi="http://www.ayjs.net/behavior"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:controller="clr-namespace:AyTableViewDemo.Controllers"
+
+      xmlns:local="clr-namespace:AyTableViewDemo.Views.Home"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      Title="HomeView">
+    <AyPage.DataContext>
+        <controller:HomeController />
+    </AyPage.DataContext>
+    <Grid x:Name="root">
+        <Grid GridService.Columns="auto *">
+            <Grid Width="180" GridService.Rows="50 *">
+                <Border Grid.Row="0" Height="50" HorizontalAlignment="Stretch" Background="#D9DEE4" BorderBrush="#BBC3CE" BorderThickness="0,0,0,1">
+                    <TextBlock FontWeight="Bold" FontSize="14" Text="AY表格示例" Foreground="#000000" AlignmentService.Alignment="l c" Margin="20,0,0,0"></TextBlock>
+                </Border>
+                <control:AyTreeView  GridService.RowColumn="1 0" AlignmentService.Alignment="s s" AyTreeMode="IconText" Style="{DynamicResource subThisAyTreeView}" 
+                                         Foreground="#333333"  ItemsSource="{Binding LeftSubMenus}"  FontSize="12"  
+                                        IconFontSize="14" IconHeight="14" IconWidth="14"  x:Name="tvLeftMenu" Background="#EAEDF1" 
+                                        VirtualizingStackPanel.IsVirtualizing="false" TreeViewItemHeight="40"  TreeViewAnimationIsOpen="true"    
+                                        BorderThickness="0" BorderBrush="#00FFFFFF" >
+                    <MvcRouteCollection.Routes>
+                        <RouteSetter  Action="{Binding TreeViewItemSelected}" Parameter="{Binding SelectedItem, ElementName=tvLeftMenu}"
+                                      Event="SelectedItemChanged" />
+                    </MvcRouteCollection.Routes>
+                </control:AyTreeView>
+
+            </Grid>
+            <Grid Grid.Column="1" Background="#FFFFFF">
+                <Frame Margin="0,20,0,0" x:Name="frame" NavigationUIVisibility="Hidden" Source="{Binding SubPageSource}"></Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</AyPage>

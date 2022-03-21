@@ -1,0 +1,25 @@
+﻿<AyPage x:Class="AyTableViewDemo.Views.RowDetail2.RowDetail2View"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:md="clr-namespace:AyTableViewDemo.Models"
+      xmlns:control="http://www.ayjs.net/controls"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:controller="clr-namespace:AyTableViewDemo.Controllers"
+
+      xmlns:local="clr-namespace:AyTableViewDemo.Views.RowDetail2"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      >
+    <AyPage.DataContext>
+        <controller:RowDetail2Controller />
+    </AyPage.DataContext>
+    <Grid>
+    
+
+    </Grid>
+
+</AyPage>

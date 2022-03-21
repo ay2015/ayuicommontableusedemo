@@ -1,0 +1,22 @@
+﻿<control:AyWindow x:Class="AyTableViewDemo.Views._ViewStart"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:control="http://www.ayjs.net/controls"    
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" BorderThickness="0" 
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+      xmlns:controller="clr-namespace:AyTableViewDemo.Controllers"  TitleVisibility="Collapsed"
+                  MinWidth="1200" MinHeight="600" Width="1400" Height="800"   Title="AYUI 7"  
+      xmlns:local="clr-namespace:AyTableViewDemo.Views" WindowStartupLocation="CenterScreen"
+      mc:Ignorable="d" 
+      >
+
+
+    <control:AyWindow.DataContext>
+        <controller:ViewStartController />
+    </control:AyWindow.DataContext>
+    <Grid  x:Name="layout"  Background="Transparent" >
+        <Frame x:Name="frame" Margin="0,0,0,0" Source="/AyTableViewDemo;component/Views/Home/HomeView.xaml" NavigationUIVisibility="Hidden"></Frame>
+    </Grid>
+</control:AyWindow>

@@ -1,0 +1,40 @@
+﻿<AyPage x:Class="AyTableViewDemo.Views.AyTableDemo22.AyTableDemo22View"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:md="clr-namespace:AyTableViewDemo.Models"
+      xmlns:control="http://www.ayjs.net/controls"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:controller="clr-namespace:AyTableViewDemo.Controllers"
+
+      xmlns:local="clr-namespace:AyTableViewDemo.Views.AyTableDemo22"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      >
+    <AyPage.DataContext>
+        <controller:AyTableDemo22Controller />
+    </AyPage.DataContext>
+    <AyPage.Resources>
+        <DataTemplate x:Key="fg" DataType="{x:Type md:CellValue}">
+            <TextBlock  Text="{Binding UserValue}" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="auto" Height="auto" 
+                                 />
+        </DataTemplate>
+    </AyPage.Resources>
+    <Grid Margin="10,10,10,10" GridService.Rows="auto *">
+        <control:AyTableView x:Name="tableView" Grid.Row="1" BorderBrush="#E1E6EB" BorderThickness="1" 
+                  CellNavigation="false" OrderBySupport="false" HeaderResizeBorderBrush="#EBEBEB"   FixedColumnCount="1"
+                  ShowHorizontalGridLines="True"     RowHeight="28" HeadRowCount="1"
+                  ShowVerticalGridLines="True"  SelectionMode="RowTenSingle" AlterLineBrushSupport="False"
+                  GridLinesBrush="#EBEBEB" HeadFontWeight="Bold" HasRectangleSelection="false" 
+                  ItemsSource="{Binding Datas}"  ItemsCount="{Binding Datas.Count}" HeaderHeight="28" 
+                >
+            <control:AyTableViewColumn Title="姓名" Field="UserName"  HorizontalContentAlignment="Center" Width="100"    VerticalContentAlignment="Center"></control:AyTableViewColumn>
+           
+
+        </control:AyTableView>
+    </Grid>
+</AyPage>
